@@ -50,11 +50,12 @@ void get_game_name(Game *game)
            index = i;
     }
 
-    if (index >= 0) {
+    if (index > 0) {
         char *tmptmp = &tmp[index + 1];                         // create a new string that starts at 1 char after the last /
         game->game_name = malloc(sizeof(tmptmp));
         strncpy(game->game_name, tmptmp, strlen(tmptmp));
     } else {
+        game->game_name = malloc(sizeof(tmp));
         strncpy(game->game_name, tmp, strlen(tmp));              // if there are no /'s then just memcpy tmp
     }
 }
