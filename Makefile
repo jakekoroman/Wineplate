@@ -7,13 +7,13 @@
 CFLAGS=-std=c11 -Wall -pedantic
 LDFLAGS=
 
-gamelauncher: main.c
+wineplate: main.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) 
 
 debug: main.c
 	$(CC) $(CFLAGS) -g -o $@ $< $(LDFLAGS)
 
 clean:
-	rm -f gamelauncher debug
+	rm -f wineplate debug
 
 # end
