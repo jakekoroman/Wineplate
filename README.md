@@ -1,6 +1,6 @@
-# title
+# Wineplate
 
-... creates executable scripts for games using proton. Simply pass the path to game into the program and it will generate an executable script that will run the game through proton with some commonly used flags.
+Wineplate creates template scripts for launching games through wine. You can use any wine version you like just put it into the config file.
 
 Note that some games will not work out of the box and will require some tinkering.
 

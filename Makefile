@@ -14,6 +14,6 @@ debug: main.c
 	$(CC) $(CFLAGS) -g -o $@ $< $(LDFLAGS)
 
 clean:
-	rm -f gamelauncher
+	rm -f gamelauncher debug
 
 # end

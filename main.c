@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include "config.h"
 
-#define BUFFER 1024 
+// TODO: add option to allow user to give a name for the output script
+// TODO: create test cases
 
 typedef struct Game {
     char *game_exe;
@@ -40,7 +41,7 @@ void parse_args(int *argc, char **argv, Game *game)
 void get_game_name(Game *game)
 {
     int n = 3;
-    char tmp[strlen(game->game_exe)];
+    char *tmp = malloc(strlen(game->game_exe) - n);
     strncpy(tmp, game->game_exe, strlen(game->game_exe) - n);   // trims the exe off the end
     tmp[strlen(tmp) - 1] = '\0';                                // sets the . to \0
 
@@ -58,6 +59,7 @@ void get_game_name(Game *game)
         game->game_name = malloc(sizeof(tmp));
         strncpy(game->game_name, tmp, strlen(tmp));              // if there are no /'s then just memcpy tmp
     }
+    free(tmp);
 }
 
 int main(int argc, char **argv)
@@ -76,6 +78,11 @@ int main(int argc, char **argv)
 
     FILE *fp = fopen(game.game_output_file, "w");
 
+    if (fp == NULL) {
+        printf("[ERROR] Cannot open file %s!\n", game.game_output_file);
+        return EXIT_FAILURE;
+    }
+
     fprintf(fp, "#!/bin/env sh\n\n");
 
     for (int i = 0; i < EXTRA_ARGS_SIZE; i++) {
@@ -84,19 +91,21 @@ int main(int argc, char **argv)
 
     fprintf(fp, "\n");
     fprintf(fp, "cd %s\n\n",   CD_PATH);
-    fprintf(fp, "%s run '%s'", PROTON_PATH, game.game_exe);
+    fprintf(fp, "%s '%s'", WINE_PATH, game.game_exe);
 
     fclose(fp);
 
     printf("[INFO] Created file %s successfully!\n", game.game_output_file);
 
-    char cmd[BUFFER] = "chmod u+x ";
-    strncat(cmd, game.game_output_file, strlen(game.game_output_file));
+    char *cmd = malloc(sizeof("chmod u+x") + sizeof(game.game_output_file));
+    sprintf(cmd, "chmod u+x %s", game.game_output_file);
     printf("[CMD]  %s\n", cmd);
     system(cmd);
+    free(cmd);
 
     printf("[INFO] Game script created successfully!\n");
 
+    // free them or else
     free(game.game_name);
     free(game.game_output_file);
 
