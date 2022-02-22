@@ -12,7 +12,7 @@ All configuration is done through the config.h file. All the macros have the sam
 
 Simply run
 ```console
-make install
+make
 ```
 
 ## Notes
