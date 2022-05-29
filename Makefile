@@ -1,9 +1,3 @@
-##
-# Game Launcher
-#
-# @file
-# @version 0.1
-
 CFLAGS=-std=c11 -Wall -pedantic
 LDFLAGS=
 
@@ -15,5 +9,3 @@ debug: main.c
 
 clean:
 	rm -f wineplate debug
-
-# end

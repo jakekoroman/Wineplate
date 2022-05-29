@@ -65,15 +65,15 @@ void get_game_name(Game *game)
 int main(int argc, char **argv)
 {
     if (argc == 1) {
-        printf("[ERROR]: Invalid usage\n[ERROR]: Main Usage: ./gamelauncher -e <exe>\n");
+        printf("[ERROR]: Invalid usage\n[ERROR]: Main Usage: ./wineplate -e <exe>\n");
         exit(EXIT_FAILURE);
     }
 
-    Game game;
+    Game game = {0};
     parse_args(&argc, argv, &game);
     get_game_name(&game);
 
-    game.game_output_file = malloc(sizeof(game.game_name) + 6);
+    game.game_output_file = malloc(sizeof(game.game_name) + 6); // 6 is the length of 'games/'
     sprintf(game.game_output_file, "games/%s", game.game_name);
 
     FILE *fp = fopen(game.game_output_file, "w");
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
     }
 
     fprintf(fp, "\n");
-    fprintf(fp, "cd %s\n\n",   CD_PATH);
+    fprintf(fp, "cd %s\n\n", CD_PATH);
     fprintf(fp, "%s '%s'", WINE_PATH, game.game_exe);
 
     fclose(fp);

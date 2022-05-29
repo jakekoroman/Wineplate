@@ -1,8 +1,8 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-// Path to proton
-static const char *WINE_PATH = "~/wine-ge/lutris-ge-7.2-2-x86_64/bin/wine";
+// Path to the wine version you wish to use
+static const char *WINE_PATH = "wine";
 
 // Path for log files
 static const char *CD_PATH = "/tmp";
