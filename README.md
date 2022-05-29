@@ -8,11 +8,11 @@ Note that some games will not work out of the box and will require some tinkerin
 
 All configuration is done through the config.h file. All the macros have the same name as the variable they are setting making it easy to look up what each one does.
 
-## Building 
+## Quick Start
 
-Simply run
 ```console
-make
+$ make
+$ ./gamelauncher -e <path-to-exe>
 ```
 
 ## Notes
